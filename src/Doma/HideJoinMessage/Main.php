@@ -21,7 +21,7 @@ class Main extends PluginBase {
         $this->saveDefaultConfig();
         $this->setup();
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        $this->getLogger()->info("HideJoinMessage enabled.");
+        //$this->getLogger()->info("HideJoinMessage enabled.");
     }
 
     public function setup(): void {
