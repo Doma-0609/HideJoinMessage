@@ -1,0 +1,20 @@
+name: HideJoinMessage
+version: 1.0.0
+main: Doma\HideJoinMessage\Main
+api: ["5.0.0"]
+description: Hide or fully customize player join/leave messages
+author: Doma
+
+commands:
+  hj:
+    description: HideJoinMessage main command
+    usage: /hj reload
+    permission: hidejoinmessage.reload
+
+permissions:
+  hidejoinmessage.reload:
+    description: Allows reloading the config
+    default: op
+  hidejoinmessage.see:
+    description: Allows seeing join/leave messages when op-exception is enabled
+    default: op

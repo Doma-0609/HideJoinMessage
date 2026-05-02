@@ -1,0 +1,17 @@
+# whether to hide the join message
+hide-join-message: true
+# custom join message | empty = hide completely | {player} = player name
+custom-join-message: ""
+
+# whether to hide the leave message
+hide-leave-message: true
+# custom leave message | empty = hide completely | {player} = player name
+custom-leave-message: ""
+
+# if true, players with hidejoinmessage.see permission will still show their messages
+op-exception: false
+
+# welcome message sent only to the joining player
+private-welcome:
+  enabled: true
+  message: "§aWelcome §e{player}§a!"
