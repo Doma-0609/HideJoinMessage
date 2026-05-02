@@ -13,27 +13,35 @@ class EventListener implements Listener {
 
     public function onJoin(PlayerJoinEvent $event): void {
         $player = $event->getPlayer();
+        $plugin = $this->plugin;
+        $exempt = $plugin->opException() && $player->hasPermission("hidejoinmessage.see");
 
-        if (!($this->plugin->opException() && $player->hasPermission("hidejoinmessage.see"))) {
-            if ($this->plugin->hideJoin()) {
-                $msg = $this->plugin->joinMsg();
-                $event->setJoinMessage($msg === "" ? "" : str_replace("{player}", $player->getName(), $msg));
+        if (!$exempt) {
+            $msg = $plugin->joinMsg();
+            if ($msg !== "") {
+                $event->setJoinMessage(str_replace("{player}", $player->getName(), $msg));
+            } elseif ($plugin->hideJoin()) {
+                $event->setJoinMessage("");
             }
         }
 
-        if ($this->plugin->welcomeEnabled()) {
-            $player->sendMessage(str_replace("{player}", $player->getName(), $this->plugin->welcomeMsg()));
+        if ($plugin->welcomeEnabled()) {
+            $player->sendMessage(str_replace("{player}", $player->getName(), $plugin->welcomeMsg()));
         }
     }
 
     public function onQuit(PlayerQuitEvent $event): void {
         $player = $event->getPlayer();
+        $plugin = $this->plugin;
+        $exempt = $plugin->opException() && $player->hasPermission("hidejoinmessage.see");
 
-        if ($this->plugin->opException() && $player->hasPermission("hidejoinmessage.see")) return;
-
-        if ($this->plugin->hideLeave()) {
-            $msg = $this->plugin->leaveMsg();
-            $event->setQuitMessage($msg === "" ? "" : str_replace("{player}", $player->getName(), $msg));
+        if (!$exempt) {
+            $msg = $plugin->leaveMsg();
+            if ($msg !== "") {
+                $event->setQuitMessage(str_replace("{player}", $player->getName(), $msg));
+            } elseif ($plugin->hideLeave()) {
+                $event->setQuitMessage("");
+            }
         }
     }
 }
